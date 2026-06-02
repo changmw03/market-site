@@ -1,0 +1,70 @@
+:root {
+  --page: #f7f6f1;
+  --surface: #ffffff;
+  --soft: #f4f7f2;
+  --ink: #1e2520;
+  --muted: #6f7a72;
+  --line: #e2e6df;
+  --green: #18a875;
+  --green-dark: #08734f;
+  --green-soft: #e5f7ef;
+  --orange: #ff9b54;
+  --orange-soft: #fff0e5;
+  --pink: #c36aa0;
+  --blue: #4a9fce;
+  --purple: #9b7bd8;
+  --shadow: 0 24px 56px rgba(30, 37, 32, 0.12);
+  --radius: 8px;
+  --control: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    linear-gradient(135deg, rgba(24, 168, 117, 0.11), transparent 34%),
+    linear-gradient(315deg, rgba(255, 155, 84, 0.13), transparent 34%),
+    var(--page);
+  color: var(--ink);
+  font-family: "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
