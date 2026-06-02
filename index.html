@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendMart | Modern Ecommerce</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#" data-view-link="home" aria-label="TrendMart 홈">
+        <span class="brand-mark">tm</span>
+        <strong><span>Trend</span>Mart</strong>
+      </a>
+
+      <nav class="main-nav" aria-label="주요 메뉴">
+        <button class="nav-link active" type="button" data-view-link="home">홈</button>
+        <button class="nav-link" type="button" data-view-link="products">상품</button>
+        <button class="nav-link" type="button" data-view-link="deals">인기딜</button>
+        <button class="nav-link" type="button" data-view-link="checkout">결제</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="wishlist-filter-button" type="button" id="wishlistButton" aria-label="찜한 상품만 보기">
+          <span>♡</span>
+          <strong>찜</strong>
+        </button>
+        <button class="cart-button" type="button" id="cartButton" aria-label="장바구니">
+          <span>Cart</span>
+          <strong id="cartCount">0</strong>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-view active" data-page="home">
+        <div class="hero-section">
+          <div class="hero-copy">
+            <p class="eyebrow">Fresh picks, better prices</p>
+            <h1>필요한 상품을 빠르게 고르는 프리미엄 쇼핑몰</h1>
+            <p>검색, 인기 키워드, 카테고리 필터, 장바구니와 결제 요약까지 화면별로 분리한 쇼핑 웹사이트입니다.</p>
+            <div class="hero-actions">
+              <button class="primary-button" type="button" data-view-link="products">상품 둘러보기</button>
+              <button class="secondary-button" type="button" data-view-link="deals">인기딜 보기</button>
+            </div>
+            <div class="trust-row" aria-label="쇼핑 혜택">
+              <span>5만원 이상 무료배송</span>
+              <span>오늘의 인기딜</span>
+              <span>SAVE10 쿠폰</span>
+            </div>
+          </div>
+          <div class="hero-media" aria-hidden="true">
+            <img src="assets/hero-shop.svg" alt="" width="520" height="420" decoding="async" fetchpriority="high">
+          </div>
+        </div>
+
+        <div class="benefit-grid" aria-label="서비스 특징">
+          <article class="benefit-card">
+            <span>01</span>
+            <strong>실시간 상품 검색</strong>
+            <p>상품명, 브랜드, 태그를 기준으로 원하는 상품을 빠르게 찾습니다.</p>
+          </article>
+          <article class="benefit-card">
+            <span>02</span>
+            <strong>필터형 쇼핑</strong>
+            <p>카테고리, 브랜드, 재고, 가격대, 정렬 조건을 조합합니다.</p>
+          </article>
+          <article class="benefit-card">
+            <span>03</span>
+            <strong>즉시 결제 요약</strong>
+            <p>장바구니 수량과 쿠폰 적용 금액을 자동으로 계산합니다.</p>
+          </article>
+        </div>
+
+        <section class="home-showcase" aria-labelledby="homeFeaturedTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Editor Picks</p>
+              <h2 id="homeFeaturedTitle">오늘의 추천</h2>
+            </div>
+            <button class="text-button" type="button" data-view-link="products">전체 상품 보기</button>
+          </div>
+          <div class="product-grid compact" id="homeFeaturedGrid"></div>
+        </section>
+
+        <section class="home-showcase" aria-labelledby="recentTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Recently Viewed</p>
+              <h2 id="recentTitle">최근 본 상품</h2>
+            </div>
+            <button class="text-button" type="button" id="clearRecent">기록 지우기</button>
+          </div>
+          <div class="product-grid compact" id="recentGrid"></div>
+        </section>
+      </section>
+
+      <section class="page-view" data-page="products">
+        <section class="page-hero compact-hero">
+          <div>
+            <p class="eyebrow">Shop catalog</p>
+            <h1>상품 찾기</h1>
+            <p>검색, 카테고리, 브랜드, 가격대, 재고 조건을 조합해서 상품을 좁혀보세요.</p>
+          </div>
+          <div class="page-stat-grid">
+            <article><strong id="catalogCount">0</strong><span>검색 결과</span></article>
+            <article><strong>12</strong><span>상품 종류</span></article>
+            <article><strong>SAVE10</strong><span>쿠폰</span></article>
+          </div>
+        </section>
+
+        <section class="toolbar-section" aria-label="상품 검색과 필터">
+          <form class="search-form" id="searchForm">
+            <label class="sr-only" for="searchInput">상품 검색</label>
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="상품, 카테고리, 브랜드 검색">
+            <button type="submit">검색</button>
+          </form>
+          <div class="trend-chips" id="trendChips" aria-label="인기 검색어"></div>
+        </section>
+
+        <section class="filter-panel" aria-label="상세 필터">
+          <label>
+            <span>브랜드</span>
+            <select id="brandSelect">
+              <option value="all">전체 브랜드</option>
+            </select>
+          </label>
+          <label>
+            <span>정렬</span>
+            <select id="sortSelect">
+              <option value="featured">추천순</option>
+              <option value="price-low">낮은 가격순</option>
+              <option value="price-high">높은 가격순</option>
+              <option value="rating">평점순</option>
+              <option value="discount">할인율순</option>
+            </select>
+          </label>
+          <label class="range-field">
+            <span>최대 가격 <strong id="priceRangeValue">전체</strong></span>
+            <input id="priceRange" type="range" min="0" max="600000" step="10000" value="600000">
+          </label>
+          <label class="stock-toggle">
+            <input id="stockOnly" type="checkbox">
+            <span>재고 있음</span>
+          </label>
+          <button class="secondary-button" type="button" id="resetFilters">필터 초기화</button>
+        </section>
+
+        <section class="category-section" aria-labelledby="categoryTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Categories</p>
+              <h2 id="categoryTitle">카테고리</h2>
+            </div>
+          </div>
+          <div class="category-grid" id="categoryGrid"></div>
+        </section>
+
+        <section class="catalog-section" aria-labelledby="productTitle">
+          <div class="section-heading catalog-heading">
+            <div>
+              <p class="eyebrow">Catalog</p>
+              <h2 id="productTitle">상품 목록</h2>
+            </div>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+
+        <section class="compare-panel" aria-labelledby="compareTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Compare</p>
+              <h2 id="compareTitle">상품 비교</h2>
+            </div>
+            <button class="text-button" type="button" id="clearCompare">비교 비우기</button>
+          </div>
+          <div class="compare-grid" id="compareGrid"></div>
+        </section>
+
+        <section class="compare-panel alert-panel" aria-labelledby="alertTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Price Alerts</p>
+              <h2 id="alertTitle">가격 알림</h2>
+            </div>
+            <button class="text-button" type="button" id="clearAlerts">알림 비우기</button>
+          </div>
+          <div class="compare-grid" id="alertGrid"></div>
+        </section>
+      </section>
+
+      <section class="page-view" data-page="deals">
+        <section class="page-hero deals-hero">
+          <div>
+            <p class="eyebrow">Limited deals</p>
+            <h1>오늘의 인기딜</h1>
+            <p>할인율이 높은 상품과 사람들이 많이 찾는 검색어를 따로 모았습니다.</p>
+          </div>
+          <div class="deal-score">
+            <strong>Up to 28%</strong>
+            <span>최대 할인</span>
+          </div>
+        </section>
+
+        <div class="deal-tools">
+          <div class="trend-chips" id="dealTrendChips" aria-label="인기딜 검색어"></div>
+          <button class="secondary-button" type="button" id="copyCoupon">SAVE10 복사</button>
+        </div>
+
+        <section class="deal-grid-section" aria-labelledby="dealTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Best value</p>
+              <h2 id="dealTitle">할인 상품</h2>
+            </div>
+            <button class="text-button" type="button" data-view-link="products">전체 상품에서 보기</button>
+          </div>
+          <div class="product-grid" id="dealGrid"></div>
+        </section>
+      </section>
+
+      <section class="page-view" data-page="checkout">
+        <section class="checkout-section" aria-labelledby="checkoutTitle">
+          <div class="checkout-copy">
+            <p class="eyebrow">Checkout</p>
+            <h2 id="checkoutTitle">주문 확인</h2>
+            <p>장바구니 상품, 배송비, 할인 쿠폰을 한 번에 확인합니다.</p>
+          </div>
+          <div class="checkout-grid">
+            <div class="checkout-items" id="checkoutItems"></div>
+            <aside class="summary-card">
+              <label class="coupon-field">
+                <span>쿠폰 코드</span>
+                <input id="couponInput" type="text" placeholder="SAVE10">
+              </label>
+              <button class="secondary-button full" type="button" id="applyCoupon">쿠폰 적용</button>
+              <label class="coupon-field">
+                <span>배송 옵션</span>
+                <select id="deliverySelect">
+                  <option value="standard">일반 배송</option>
+                  <option value="express">빠른 배송 +3,000원</option>
+                  <option value="pickup">매장 픽업 무료</option>
+                </select>
+              </label>
+              <dl class="price-summary" id="priceSummary"></dl>
+              <button class="primary-button full" type="button" id="placeOrder">주문하기</button>
+            </aside>
+          </div>
+          <section class="order-history" aria-labelledby="orderHistoryTitle">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Orders</p>
+                <h2 id="orderHistoryTitle">주문 내역</h2>
+              </div>
+              <button class="text-button" type="button" id="clearOrders">내역 지우기</button>
+            </div>
+            <div class="order-list" id="orderHistory"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="장바구니" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <p class="eyebrow">Cart</p>
+        <h2>장바구니</h2>
+      </div>
+      <div class="drawer-actions">
+        <button class="text-button" type="button" id="clearCart">전체 비우기</button>
+        <button class="icon-button" type="button" id="closeCart" aria-label="닫기">×</button>
+      </div>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="drawer-footer">
+      <dl class="price-summary compact" id="drawerSummary"></dl>
+      <button class="primary-button full" type="button" data-view-link="checkout">결제하기</button>
+    </div>
+  </aside>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+
+  <section class="detail-modal" id="detailModal" aria-hidden="true" aria-label="상품 상세">
+    <div class="detail-card" id="detailCard"></div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="scripts/data.js" defer></script>
+  <script src="scripts/store.js" defer></script>
+  <script src="scripts/filters.js" defer></script>
+  <script src="scripts/cart.js" defer></script>
+  <script src="scripts/reviews.js" defer></script>
+  <script src="scripts/render.js" defer></script>
+  <script src="scripts/app.js" defer></script>
+</body>
+</html>
